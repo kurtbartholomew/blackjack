@@ -7,14 +7,17 @@ class window.AppView extends Backbone.View
 
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
-    'click .stand-button': -> @model.get('playerHand').stand()
+    'click .stand-button': ->
+      @model.get('dealerHand').stand()
+      @model.get('playerHand').stand()
 
   initialize: ->
     @render()
 
-  render: ->
-    @$el.children().detach()
+  render: -> #similar to .html('') cleanup
+    @$el.children().detach() #wipes clean inside the $el div
     @$el.html @template()
+    # $el is the DOM node wrapped in jquery; el is the DOM node (no wrapper)
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
 
