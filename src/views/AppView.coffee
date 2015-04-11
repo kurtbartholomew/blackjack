@@ -15,6 +15,10 @@ class window.AppView extends Backbone.View
 
   initialize: ->
     @render()
+    @model.on 'change:gameStatus', ->
+      @$el.children('.hit-button').hide()
+      @$el.children('.stand-button').hide()
+    ,@
 
   render: -> #similar to .html('') cleanup
     @$el.children().detach() #wipes clean inside the $el div

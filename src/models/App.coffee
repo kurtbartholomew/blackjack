@@ -2,6 +2,9 @@
 # of containing the game logic directly.
 class window.App extends Backbone.Model
 
+  defaults:
+    gameStatus: 'Running'
+
   initialize: ->
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
@@ -13,6 +16,7 @@ class window.App extends Backbone.Model
     @get('dealerHand').on 'bust', ->
       @get('game').win()
     ,@
-    # @get('game').on 'over', ->
-    #
-    # ,@
+    @get('game').on 'over', ->
+      @set('gameStatus', 'notRunning')
+    ,@
+

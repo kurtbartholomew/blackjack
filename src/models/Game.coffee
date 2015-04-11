@@ -8,19 +8,18 @@ class window.Game extends Backbone.Model
     dealerWins: 0
     ties: 0
     gameType: 'Blackjack'
-    gameStatus: 'Running'
 
   win: ->
     @set 'playerWins',@get( 'playerWins' ) + 1
-    # @resolveGame()
+    @resolveGame()
 
   lose: ->
     @set 'dealerWins',@get( 'dealerWins' ) + 1
-    # @resolveGame()
+    @resolveGame()
 
   tie: ->
     @set 'ties', @get( 'ties' ) + 1
-    # @resolveGame()
+    @resolveGame()
 
   checkFinal: ->
     appInstance = @get 'mainApp'
@@ -39,5 +38,6 @@ class window.Game extends Backbone.Model
       @.tie()
 
   resolveGame: ->
+    console.log("Resolving...")
     @trigger 'over' #'over' is the event being triggered
 
