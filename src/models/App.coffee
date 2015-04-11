@@ -5,4 +5,14 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
+    @set 'game', game = new Game()
 
+  checkFinal: ->
+    playerScores = @get('playerHand').scores()
+    dealerScores = @get('dealerHand').scores()
+    if playerScores > dealerScores #win
+      @get('game').win('player')
+    else if playerScores < dealerScores #lose
+      @get('game').win('dealer')
+    else
+      @get('game').tie()
