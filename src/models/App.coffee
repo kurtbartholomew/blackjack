@@ -10,9 +10,13 @@ class window.App extends Backbone.Model
   checkFinal: ->
     playerScores = @get('playerHand').scores()
     dealerScores = @get('dealerHand').scores()
-    if playerScores > dealerScores #win
+
+    playerScore = _.max(playerScores)
+    dealerScore = _.max(dealerScores)
+
+    if playerScore > dealerScore #win
       @get('game').win('player')
-    else if playerScores < dealerScores #lose
+    else if playerScore < dealerScore #lose
       @get('game').win('dealer')
     else
       @get('game').tie()

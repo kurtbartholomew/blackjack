@@ -23,4 +23,3 @@ class window.Hand extends Backbone.Collection
   stand: ->
     if @isDealer
       @at(0).flip()
-
